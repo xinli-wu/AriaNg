@@ -6,6 +6,7 @@
         var downloadTaskRefreshPromise = null;
         var pauseDownloadTaskRefresh = false;
         var currentRowTriggeredMenu = null;
+        var superPeers = [];
 
         var getAvailableOptions = function (status, isBittorrent) {
             var keys = aria2SettingService.getAvailableTaskOptionKeys(status, isBittorrent);
@@ -44,13 +45,41 @@
             ariaNgMonitorService.recordStat(task.gid, task);
         };
 
-        var processPeers = function (peers) {
+        var processPeers = function (peers, superPeers) {
             if (!peers) {
                 return;
             }
 
             if (!ariaNgCommonService.extendArray(peers, $scope.context.btPeers, 'peerId')) {
                 $scope.context.btPeers = peers;
+                // Getting GEO info START
+                for (var i = 0; i < peers.length; i++) {
+                    if (!peers[i].local) {  //real peer
+                        var push = true;
+                        for (var j = 0; j < superPeers.length; j++) {
+                            if (superPeers[j].ip === peers[i].ip) {
+                                push = false;
+                                peers[i].geoData = superPeers[j].geoData;
+                            }
+                        }
+                        if (push) {
+                            superPeers.push(peers[i]);
+                            $.ajax({
+                                url: 'https://ip.xwu.us/api/getGEOIPInfoByIP/' + peers[i].ip,
+                                type: 'GET',
+                                dataType: 'json',
+                                async: true,
+                                index: i,
+                                success: function (data) {
+                                    peers[this.index].geoData = data
+                                },
+                                error: function () { },
+                            })
+                        }
+                    }
+                }
+                // Getting GEO info END
+
             }
 
             $scope.context.healthPercent = aria2TaskService.estimateHealthPercentFromPeers($scope.task, $scope.context.btPeers);
@@ -85,7 +114,7 @@
                     if (requireBtPeers(task)) {
                         aria2TaskService.getBtTaskPeers(task, function (response) {
                             if (response.success) {
-                                processPeers(response.data);
+                                processPeers(response.data, superPeers);
                             }
                         }, silent, includeLocalPeer);
                     }
@@ -97,7 +126,7 @@
                     }
 
                     processTask(response.task);
-                    processPeers(response.peers);
+                    processPeers(response.peers, superPeers);
                 }, silent, requireBtPeers($scope.task), includeLocalPeer, addVirtualFileNode);
             }
         };
