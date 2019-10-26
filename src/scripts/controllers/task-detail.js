@@ -79,9 +79,7 @@
                     }
                 }
                 // Getting GEO info END
-
             }
-
             $scope.context.healthPercent = aria2TaskService.estimateHealthPercentFromPeers($scope.task, $scope.context.btPeers);
         };
 
