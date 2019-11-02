@@ -65,7 +65,7 @@
                         if (push) {
                             superPeers.push(peers[i]);
                             $.ajax({
-                                url: 'https://ip.xwu.us/api/getGEOIPInfoByIP/' + peers[i].ip,
+                                url: 'https://ip.xwu.us/' + peers[i].ip,
                                 type: 'GET',
                                 dataType: 'json',
                                 async: true,
