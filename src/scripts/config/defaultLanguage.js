@@ -183,6 +183,7 @@
             'Stay on Current Page': 'Stay on Current Page',
             'Remove Old Tasks After Retrying': 'Remove Old Tasks After Retrying',
             'Confirm Task Removal': 'Confirm Task Removal',
+            'Include Prefix When Copying From Task Details': 'Include Prefix When Copying From Task Details',
             'RPC List Display Order': 'RPC List Display Order',
             'Recently Used': 'Recently Used',
             'RPC Alias': 'RPC Alias',

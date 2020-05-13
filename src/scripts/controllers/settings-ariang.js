@@ -191,6 +191,10 @@
             ariaNgSettingService.setConfirmTaskRemoval(value);
         };
 
+        $scope.setIncludePrefixWhenCopyingFromTaskDetails = function (value) {
+            ariaNgSettingService.setIncludePrefixWhenCopyingFromTaskDetails(value);
+        };
+
         $scope.setAfterRetryingTask = function (value) {
             ariaNgSettingService.setAfterRetryingTask(value);
         };
