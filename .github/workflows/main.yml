@@ -28,3 +28,6 @@ jobs:
             ARGS: "-rltgoDzvO --delete"
             SOURCE: "dist/"
             TARGET: ${{ secrets.REMOTE_TARGET }}
+      - name: Change owner
+        run: sudo chown -R nginx:nginx ${{ secrets.REMOTE_TARGET }}
+  
