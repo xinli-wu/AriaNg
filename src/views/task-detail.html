@@ -374,7 +374,7 @@
                                 <div class="peer-name-wrapper auto-ellipsis"
                                     title="{{(peer.client ? peer.client.info : '') + (peer.seeder ? (peer.client.info ? ', ' : '') + ('Seeding' | translate) : '')}}">
                                     <span
-                                        ng-bind=" '[' + peer.geoData.name + ', ' + peer.geoData.continent + ']' | translate"
+                                        ng-bind=" '[' + peer.geoData.name + ', ' + peer.geoData.region + ']' | translate"
                                         ng-if="peer.geoData"></span>
                                     <span ng-bind="peer.name | translate"></span>
                                     <i class="icon-seeder fa fa-angle-double-up" ng-if="peer && peer.seeder"></i>
