@@ -96,8 +96,5 @@
   "bugs": {
     "url": "https://github.com/mayswind/AriaNg/issues"
   },
-  "homepage": "http://ariang.mayswind.net/",
-  "resolutions": {
-    "graceful-fs": "^4.2.4"
-  }
+  "homepage": "http://ariang.mayswind.net/"
 }
