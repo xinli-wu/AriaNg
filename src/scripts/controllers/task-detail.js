@@ -65,16 +65,16 @@
                         if (push) {
                             superPeers.push(peers[i]);
                             $.ajax({
-                                url: 'https://ip.xwu.us/' + peers[i].ip,
+                                url: 'https://api.ip.xwu.us/' + peers[i].ip,
                                 type: 'GET',
                                 dataType: 'json',
                                 async: true,
                                 index: i,
                                 success: function (data) {
-                                    peers[this.index].geoData = data
+                                    peers[this.index].geoData = data;
                                 },
                                 error: function () { },
-                            })
+                            });
                         }
                     }
                 }
