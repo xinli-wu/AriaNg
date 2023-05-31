@@ -49,10 +49,12 @@
                     });
                 };
 
-                angular.element('#quickSettingModal').on('hidden.bs.modal', function () {
-                    scope.setting = null;
-                    scope.context.availableOptions = [];
-                    scope.context.globalOptions = [];
+                angular.element(element).on('hidden.bs.modal', function () {
+                    scope.$apply(function () {
+                        scope.setting = null;
+                        scope.context.availableOptions = [];
+                        scope.context.globalOptions = [];
+                    });
                 });
 
                 scope.$watch('setting', function (setting) {
@@ -60,7 +62,7 @@
                         loadOptions(setting.type);
                         loadAria2OptionsValue();
 
-                        angular.element('#quickSettingModal').modal('show');
+                        angular.element(element).modal('show');
                     }
                 }, true);
             }
